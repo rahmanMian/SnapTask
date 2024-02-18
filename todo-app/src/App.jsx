@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { NewTodoForm } from "./NewTodoForm"
 import { TodoList } from "./TodoList"
 import todoLogo from "./assets/todologo.png"
+import { TodoItem } from "./TodoItem"
 
 
 
@@ -32,6 +33,19 @@ function addTodo(title){
    })
 }
 
+
+function editTodo(id, newTitle) {
+  setTodos(currentTodos => {
+    return currentTodos.map(todo => {
+      if (todo.id === id) {
+        return { ...todo, title: newTitle }; // Update only the title
+      }
+      return todo;
+    });
+  });
+}
+
+
     function toggleTodo(id, completed) {
       setTodos(currentTodos => {
         return currentTodos.map(todo => {
@@ -43,6 +57,7 @@ function addTodo(title){
       })
     }
 
+    
     function deleteTodo(id) {
       setTodos(currentTodos => {
         return currentTodos.filter(todo => todo.id !== id)
@@ -69,7 +84,9 @@ function addTodo(title){
    <NewTodoForm addFunc={addTodo} />
    </div>
 
-   <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo}/>
+   <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo}/>
+
+  
     </>)
 }
 
