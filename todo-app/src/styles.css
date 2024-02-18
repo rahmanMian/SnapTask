@@ -1,0 +1,58 @@
+*{
+    margin: 0;
+  }
+
+.headContainer{
+    display: flex;
+    height: 10vh;
+    align-items: center;
+    background-color: #ffdb58;
+}
+
+img{
+    height: 5rem;
+    z-index: 1;
+}
+
+h1{
+    font-family: 'Roboto Slab', serif;
+    font-size: 3rem;
+    z-index: 1;
+}
+
+
+.lineGrid{
+    height: 10vh;
+    position: absolute;  
+}
+
+.lineGrid > hr{
+        border: 1px solid black;
+        border-style: dashed;
+        width: 100vw;
+        margin-bottom: 2.6vh;
+        z-index: 2;
+      }
+
+      .lineGrid > hr:first-child {
+       margin-top: 3px;
+    }
+
+    .lineGrid >.lineGrid > hr:nth-child(2) {
+        margin-bottom: 3px;
+     }
+
+    .lineGrid > hr:nth-child(3) {
+        margin-top: 32px;
+     }
+     
+     
+
+
+
+
+@media (max-width: 768px) {
+    .headContainer {
+       justify-content: center;
+ }
+}
