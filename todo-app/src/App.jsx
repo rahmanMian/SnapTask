@@ -1,9 +1,9 @@
 
 import { useEffect, useState } from "react"
-import "./styles.css"
 import { NewTodoForm } from "./NewTodoForm"
 import { TodoList } from "./TodoList"
-import todoLogo from "./assets/todologo.png";
+import todoLogo from "./assets/todologo.png"
+
 
 
 
@@ -65,7 +65,7 @@ function addTodo(title){
    <h1 className="header">Todo List</h1>
    </div>
   
-  <div >
+  <div className="formContainer">
    <NewTodoForm addFunc={addTodo} />
    </div>
 

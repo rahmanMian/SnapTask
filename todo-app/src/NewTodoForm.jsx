@@ -1,4 +1,6 @@
 import { useState } from "react";
+import "./styles.css"
+
 export function NewTodoForm({addFunc}){
     //addtodo function from app
     addFunc  
@@ -21,10 +23,10 @@ export function NewTodoForm({addFunc}){
     
     <form onSubmit={handleSubmit} className="new-item-form">
     <div className="form-row">
-      <label htmlFor="item">New Item</label>
-      <input value={newItem} onChange={e=> setNewItem(e.target.value)}/>
+     <input  id = "addInput" placeholder="Add a task..." value={newItem} onChange={e=> setNewItem(e.target.value)}/>
+     <button id="addButton" className="button">Add</button>
     </div>
-    <button className="button">Add task</button>
+    
 </form>
 </>
   )
