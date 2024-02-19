@@ -11,18 +11,31 @@ import { TodoItem } from "./TodoItem"
 export default function App() {
   //states immuntable
   
+  const [count, setCount] = useState(() => {
+      // Retrieve the number from local storage or default to 0
+      const storedNumber = localStorage.getItem('COUNT');
+      return storedNumber ? parseInt(storedNumber, 10) : 0;
+  })
+
   const [todos, setTodos] = useState(() => {
     const localValue = localStorage.getItem("ITEMS")
-
+    
     if (localValue == null) return []
     return JSON.parse(localValue)
   })
 
 
+
+
   useEffect(() => {
     localStorage.setItem("ITEMS", JSON.stringify(todos))
   },[todos])
+
+  useEffect(() => {
+    localStorage.setItem('COUNT', count);
+  }, [count]);
     
+ 
 
 function addTodo(title){
   setTodos(currentTodos =>{
@@ -83,10 +96,12 @@ function editTodo(id, newTitle) {
    </div>
   
   <div className="formContainer">
-   <NewTodoForm addFunc={addTodo} />
+    
+   <NewTodoForm addFunc={addTodo} setCount={setCount}  />
    </div>
 
    <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo}/>
+   {count}
 
   
     </>)
