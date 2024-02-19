@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function TodoItem({completed, id, title, toggleTodo, deleteTodo, editTodo}){
   const [newItem, setNewItem] = useState(title); 
@@ -8,23 +8,33 @@ export function TodoItem({completed, id, title, toggleTodo, deleteTodo, editTodo
     setNewItem(newTitle); // Update the state with the new title
     editTodo(id, newTitle); // Call editTodo function to update title in parent component
   };
+ 
+  useEffect(() => {
+    const textarea = document.getElementById("textarea_" + id);
+    if (textarea) {
+      textarea.style.height = "auto"; // Reset the height to auto to calculate the new height
+      textarea.style.width = "auto";
+      textarea.style.height = textarea.scrollHeight + "px"; // Set the height to the scroll height
+      textarea.style.width = textarea.scrollWidth + "px";
+    }
+  }, [newItem]);
+
 
   
     return (
     <li>
-    <label htmlFor="singleInput">
+    
      
-      <input className="singleInput" type="checkbox" checked={completed}
+      <input id="checkInput" className="singleInput" type="checkbox" checked={completed}
       onChange={e =>toggleTodo(id, e.target.checked)}  />  
-      
       <span className="singleInput">
-       <textarea type="text" value= {newItem} onChange={handleEdit}  />
-         
+        
+       <textarea  id={"textarea_" + id} type="text" value= {newItem} onChange={handleEdit}  />
      </span>
     
      <button className="singleInput button" onClick={() => deleteTodo(id)} 
       id="deleteButton">Delete</button>
-    </label>
+   
 </li>
     )
 }

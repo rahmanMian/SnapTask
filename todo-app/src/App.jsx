@@ -35,8 +35,10 @@ function addTodo(title){
 
 
 function editTodo(id, newTitle) {
+
   setTodos(currentTodos => {
     return currentTodos.map(todo => {
+      if(todo.title === "") deleteTodo(id)
       if (todo.id === id) {
         return { ...todo, title: newTitle }; // Update only the title
       }

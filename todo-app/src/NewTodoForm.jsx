@@ -3,7 +3,7 @@ import "./styles.css"
 
 export function NewTodoForm({addFunc}){
     //addtodo function from app
-    addFunc  
+    
 
     //usestate for entering new values
     const [newItem, setNewItem] = useState("")
