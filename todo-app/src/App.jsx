@@ -4,6 +4,7 @@ import { NewTodoForm } from "./NewTodoForm"
 import { TodoList } from "./TodoList"
 import todoLogo from "./assets/todologo.png"
 import { TodoItem } from "./TodoItem"
+import {NoteList} from "./NoteList"
 
 
 
@@ -100,7 +101,7 @@ function editTodo(id, newTitle) {
    </div>
 
    <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo}/>
-   
+    <NoteList/>
     </>)
 }
 
