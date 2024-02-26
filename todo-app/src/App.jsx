@@ -5,6 +5,7 @@ import { TodoList } from "./TodoList"
 import todoLogo from "./assets/todologo.png"
 import { TodoItem } from "./TodoItem"
 import {NoteList} from "./NoteList"
+import { Note } from "./Note"
 
 
 
@@ -42,7 +43,7 @@ function addTodo(title){
   setTodos(currentTodos =>{
     return [
       ...currentTodos,
-      {id:crypto.randomUUID(), title: title, completed:false},
+      {id:crypto.randomUUID(), title: title, completed:false,},
     ]
    })
 }
@@ -96,12 +97,19 @@ function editTodo(id, newTitle) {
    </div>
   
   <div className="formContainer">
-    
    <NewTodoForm addFunc={addTodo} setCount={setCount}  />
    </div>
 
-   <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo}/>
-    <NoteList/>
-    </>)
+  {/* <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo}/>*/}
+
+   <div className="noteContainer">
+    <div cLassName="notes">
+   <Note todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo}/>
+
+   </div>
+   </div>
+   
+    </>
+    )
 }
 

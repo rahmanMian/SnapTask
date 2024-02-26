@@ -11,6 +11,7 @@ export function NewTodoForm({addFunc, setCount}){
     function handleSubmit(e){
         e.preventDefault();
        if(newItem  === "") return
+       
        addFunc(newItem)
        setCount(count=> count + 1)
        setNewItem("")

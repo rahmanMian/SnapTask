@@ -29,7 +29,7 @@ export function TodoItem({completed, id, title, toggleTodo, deleteTodo, editTodo
       <input id="checkInput" className="singleInput" type="checkbox" checked={completed}
       onChange={e =>toggleTodo(id, e.target.checked)}  />  
 
-      <span className="singleInput">
+      <span className="singleInput" id="textPan"> 
        <textarea  id={"textarea_" + id} type="text" value= {newItem} onChange={handleEdit}  />
      </span>
     
