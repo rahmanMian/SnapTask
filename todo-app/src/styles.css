@@ -160,7 +160,7 @@ h1{
       font-family: "Roboto Slab";
       overflow-y: hidden;
       resize: none;
-      max-width: 25vw;
+      max-width: 15vw;
       
     }
 
@@ -177,6 +177,7 @@ h1{
       padding: 1rem;
       min-height: 20vh;
       min-width: 15vw;
+      max-width: 25vw;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -187,6 +188,11 @@ h1{
       display: flex;
       align-items: center;
       justify-content: space-between;
+   
+    }
+
+    .delete-icon:hover{
+         transform: scale(1.2);
     }
 
     .noteContainer{

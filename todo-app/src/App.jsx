@@ -19,9 +19,18 @@ export default function App() {
       return storedNumber ? parseInt(storedNumber, 10) : 0;
   })
 
+
   const [todos, setTodos] = useState(() => {
     const localValue = localStorage.getItem("ITEMS")
     
+
+    if (localValue == null) return []
+    return JSON.parse(localValue)
+  })
+
+  
+  const [notes, setNote] = useState(()=>{
+    const localValue = localStorage.getItem('NOTES');
     if (localValue == null) return []
     return JSON.parse(localValue)
   })
@@ -36,14 +45,28 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('COUNT', count);
   }, [count]);
+
+
+  useEffect(() => {
+    localStorage.setItem('NOTES', JSON.stringify(notes));
+}, [notes]);
+
     
- 
+
+function addNote(title){
+  setNote(currentNotes =>{
+    return [
+      ...currentNotes,
+      {id:crypto.randomUUID(),title:title},
+    ]
+  })
+}
 
 function addTodo(title){
   setTodos(currentTodos =>{
     return [
       ...currentTodos,
-      {id:crypto.randomUUID(), title: title, completed:false,},
+      {id:crypto.randomUUID(), title: title, completed:false},
     ]
    })
 }
@@ -80,7 +103,7 @@ function editTodo(id, newTitle) {
       })
     }
 
-
+   
 
   return (
   <>
@@ -97,14 +120,14 @@ function editTodo(id, newTitle) {
    </div>
   
   <div className="formContainer">
-   <NewTodoForm addFunc={addTodo} setCount={setCount}  />
+   <NewTodoForm addFunc={addTodo} setCount={setCount} addNote={addNote}  />
    </div>
 
   {/* <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo}/>*/}
 
    <div className="noteContainer">
     <div cLassName="notes">
-   <Note todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo}/>
+   <Note notes={notes} todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo}/>
 
    </div>
    </div>

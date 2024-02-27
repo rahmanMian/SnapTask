@@ -12,13 +12,12 @@ export function TodoItem({completed, id, title, toggleTodo, deleteTodo, editTodo
   useEffect(() => {
     const textarea = document.getElementById("textarea_" + id);
     
-  
    
     if (textarea) {
       textarea.style.height = "auto"; // Reset the height to auto to calculate the new height
       textarea.style.width = "auto";
       textarea.style.height = textarea.scrollHeight + "px"; // Set the height to the scroll height
-      textarea.style.width = newItem.length*11 + "px";
+      textarea.style.width = newItem.length*13 + "px";
     }
   }, [newItem]);
 
