@@ -29,13 +29,17 @@ export default function App() {
   })
 
   
-  const [notes, setNote] = useState(()=>{
-    const localValue = localStorage.getItem('NOTES');
-    if (localValue == null) return []
-    return JSON.parse(localValue)
-  })
-
-
+  const [notes, setNotes] = useState(() => {
+    try {
+      const localValue = localStorage.getItem('NOTES');
+      if (localValue === null) return [];
+      return JSON.parse(localValue);
+    } catch (error) {
+      console.error('Error parsing notes from localStorage:', error);
+      return []; // Return an empty array in case of parsing error
+    }
+  });
+  
 
 
   useEffect(() => {
@@ -48,19 +52,20 @@ export default function App() {
 
 
   useEffect(() => {
-    localStorage.setItem('NOTES', JSON.stringify(notes));
+    localStorage.setItem("NOTES", JSON.stringify(notes))
 }, [notes]);
 
     
 
-function addNote(title){
-  setNote(currentNotes =>{
-    return [
-      ...currentNotes,
-      {id:crypto.randomUUID(),title:title},
+function addNote(title) {
+  setNotes(currentNotes => {
+ 
+    return [...currentNotes, 
+      {id: crypto.randomUUID(), title: title}
     ]
   })
 }
+
 
 function addTodo(title){
   setTodos(currentTodos =>{
@@ -103,6 +108,11 @@ function editTodo(id, newTitle) {
       })
     }
 
+    function deleteNote(id){
+      setNotes(notes=> {
+        return notes.filter(note => note.id !== id)
+      })
+    }
    
 
   return (
@@ -126,8 +136,8 @@ function editTodo(id, newTitle) {
   {/* <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo}/>*/}
 
    <div className="noteContainer">
-    <div cLassName="notes">
-   <Note notes={notes} todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo}/>
+    <div className="notes">
+   <Note notes={notes} todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} deleteNote={deleteNote}/>
 
    </div>
    </div>

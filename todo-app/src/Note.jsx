@@ -4,15 +4,16 @@ import { NewTodoForm } from './NewTodoForm';
 import { NoteList } from './NoteList';
 import { NoteTitle } from './NoteTitle';
 
-export function Note({notes, todos, toggleTodo, deleteTodo, editTodo}){
+export function Note({notes, todos, toggleTodo, deleteTodo, editTodo, deleteNote}){
     return <div className='note'>
+
         {notes.map(note =>{
-        return (<NoteTitle {...note} title = {note.title}/>
+        return (<NoteTitle {...note} title = {note.title} key = {note.id} deleteNote={deleteNote}/>
         )
         })}
         <span>
         {todos.map(todo =>{
-          return (<TodoItem {...todo} completed = {todo.completed} key ={todo.id}  title = {todo.title} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo}/>
+          return (<TodoItem {...todo}  completed = {todo.completed} key ={todo.id}  title = {todo.title} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} deleteNote={deleteNote} />
       )
      })}
      </span>

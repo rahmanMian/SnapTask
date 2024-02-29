@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react";
 
-export function TodoItem({completed, id, title, toggleTodo, deleteTodo, editTodo}){
+export function TodoItem({completed, id, title, toggleTodo, deleteTodo, editTodo, deleteNote, noteId}){
   const [newItem, setNewItem] = useState(title); 
 
   const handleEdit = (e) => {
     const newTitle = e.target.value;
     setNewItem(newTitle); // Update the state with the new title
     editTodo(id, newTitle); // Call editTodo function to update title in parent component
+  };
+
+  const handleDelete = () => {
+    deleteTodo(id);
+   
   };
  
   useEffect(() => {
@@ -32,7 +37,7 @@ export function TodoItem({completed, id, title, toggleTodo, deleteTodo, editTodo
        <textarea  id={"textarea_" + id} type="text" value= {newItem} onChange={handleEdit}  />
      </span>
     
-     <button className="singleInput button" onClick={() => deleteTodo(id)} 
+     <button className="singleInput button" onClick={handleDelete}  
       id="deleteButton">Delete</button>
 </li>
     )
