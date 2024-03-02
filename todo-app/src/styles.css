@@ -203,5 +203,12 @@ h1{
     }
 
     
+    #noteTitle{
+      font-size: 2rem; /* Adjust the font size as needed */
+      font-weight: bold; /* Make the text bold */
+      color: #333;
+      min-width: 20%;
+      
+    }
 
     

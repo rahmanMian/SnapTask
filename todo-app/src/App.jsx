@@ -64,6 +64,9 @@ function addNote(title) {
       {id: crypto.randomUUID(), title: title}
     ]
   })
+  
+
+
 }
 
 
@@ -74,6 +77,8 @@ function addTodo(title){
       {id:crypto.randomUUID(), title: title, completed:false},
     ]
    })
+
+   
 }
 
 
@@ -85,6 +90,18 @@ function editTodo(id, newTitle) {
         return { ...todo, title: newTitle }; // Update only the title
       }
       return todo;
+    });
+  });
+}
+
+function editNote(id, newTitle) {
+
+  setNotes(currentNotes => {
+    return currentNotes.map(note => {
+      if (note.id === id) {
+        return { ...note, title: newTitle }; // Update only the title
+      }
+      return note;
     });
   });
 }
@@ -130,15 +147,16 @@ function editTodo(id, newTitle) {
    </div>
   
   <div className="formContainer">
-   <NewTodoForm addFunc={addTodo} setCount={setCount} addNote={addNote}  />
+   <NewTodoForm addFunc={addTodo} setCount={setCount} addNote={addNote}  notes={notes} todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} deleteNote={deleteNote} editNote={editNote}  />
    </div>
 
   {/* <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo}/>*/}
 
    <div className="noteContainer">
     <div className="notes">
-   <Note notes={notes} todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} deleteNote={deleteNote}/>
-
+    {notes.map((note) => (
+    <Note notes={notes} todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} deleteNote={deleteNote} editNote={editNote}/>
+    ))}
    </div>
    </div>
    

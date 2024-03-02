@@ -9,6 +9,8 @@ export function TodoItem({completed, id, title, toggleTodo, deleteTodo, editTodo
     editTodo(id, newTitle); // Call editTodo function to update title in parent component
   };
 
+  
+
   const handleDelete = () => {
     deleteTodo(id);
    

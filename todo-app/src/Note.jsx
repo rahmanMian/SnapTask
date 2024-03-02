@@ -4,11 +4,10 @@ import { NewTodoForm } from './NewTodoForm';
 import { NoteList } from './NoteList';
 import { NoteTitle } from './NoteTitle';
 
-export function Note({notes, todos, toggleTodo, deleteTodo, editTodo, deleteNote}){
+export function Note({notes, todos, toggleTodo, deleteTodo, editTodo, deleteNote, editNote}){
     return <div className='note'>
-
         {notes.map(note =>{
-        return (<NoteTitle {...note} title = {note.title} key = {note.id} deleteNote={deleteNote}/>
+        return (<NoteTitle {...note} title = {note.title} key = {note.id} deleteNote={deleteNote} editNote = {editNote} />
         )
         })}
         <span>

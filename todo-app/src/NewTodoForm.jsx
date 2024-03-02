@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./styles.css"
 
-export function NewTodoForm({addFunc, setCount, addNote}){
+export function NewTodoForm({addFunc, setCount, addNote, notes, todos, toggleTodo, deleteTodo, editTodo, deleteNote, editNote}){
     //addtodo function from app
     
 
@@ -11,7 +11,7 @@ export function NewTodoForm({addFunc, setCount, addNote}){
     function handleSubmit(e){
         e.preventDefault();
        if(newItem  === "") return
-       addNote(newItem)
+       addNote(newItem,notes, todos, toggleTodo, deleteTodo, editTodo, deleteNote, editNote)
        addFunc(newItem)
        setCount(count=> count + 1)
        setNewItem("")
@@ -25,7 +25,7 @@ export function NewTodoForm({addFunc, setCount, addNote}){
     
     <div className="form-row">
      <input  id = "addInput" placeholder="Add a task..." value={newItem} onChange={e=> setNewItem(e.target.value)}/>
-     <button id="addButton" className="button">Add</button>
+     <button id="addButton" type = "submit" className="button">Add</button>
     </div>
     
     
