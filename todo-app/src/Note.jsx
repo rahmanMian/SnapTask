@@ -4,8 +4,11 @@ import { NewTodoForm } from './NewTodoForm';
 import { NoteList } from './NoteList';
 import { NoteTitle } from './NoteTitle';
 
-export function Note({notes, todos, toggleTodo, deleteTodo, editTodo, deleteNote, editNote}){
-    return <div className='note'>
+export function Note({notes, todos, toggleTodo, deleteTodo, editTodo, deleteNote, editNote, count, setCount}){
+
+  
+
+    return <div className='note' key ={count}>
         {notes.map(note =>{
         return (<NoteTitle {...note} title = {note.title} key = {note.id} deleteNote={deleteNote} editNote = {editNote} />
         )

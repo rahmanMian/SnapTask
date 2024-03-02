@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./styles.css"
 
-export function NewTodoForm({addFunc, setCount, addNote, notes, todos, toggleTodo, deleteTodo, editTodo, deleteNote, editNote}){
+export function NewTodoForm({addFunc, setCount, addNote}){
     //addtodo function from app
     
 
@@ -11,9 +11,9 @@ export function NewTodoForm({addFunc, setCount, addNote, notes, todos, toggleTod
     function handleSubmit(e){
         e.preventDefault();
        if(newItem  === "") return
-       addNote(newItem,notes, todos, toggleTodo, deleteTodo, editTodo, deleteNote, editNote)
+       addNote(newItem)
        addFunc(newItem)
-       setCount(count=> count + 1)
+       setCount(count => count + 1)
        setNewItem("")
        
       }
