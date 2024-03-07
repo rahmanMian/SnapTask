@@ -11,7 +11,7 @@ export function NewTodoForm({addFunc, setCount, addNote}){
     function handleSubmit(e){
         e.preventDefault();
        if(newItem  === "") return
-       addNote(newItem,notes, todos, toggleTodo, deleteTodo, editTodo, deleteNote, editNote)
+       addNote(newItem)
        //addFunc(newItem)
        setCount(count=> count + 1)
        setNewItem("")

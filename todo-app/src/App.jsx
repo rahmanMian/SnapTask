@@ -148,7 +148,7 @@ function editNote(id, newTitle) {
    <NewTodoForm addFunc={addTodo} setCount={setCount} addNote={addNote}  />
    </div>
 
-  {/* <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo}/>*/}
+
 
    <div className="noteContainer">
     <div className="notes">
