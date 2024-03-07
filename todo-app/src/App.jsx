@@ -155,7 +155,7 @@ function editNote(id, newTitle) {
    <div className="noteContainer">
     <div className="notes">
     {notes.map((note) => (
-    <Note notes={notes} todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} deleteNote={deleteNote} editNote={editNote}/>
+    <Note key = {note.id} note={note} deleteNote={deleteNote} editNote={editNote}/>
     ))}
    </div>
    </div>

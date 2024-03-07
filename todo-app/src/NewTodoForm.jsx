@@ -12,10 +12,9 @@ export function NewTodoForm({addFunc, setCount, addNote, notes, todos, toggleTod
         e.preventDefault();
        if(newItem  === "") return
        addNote(newItem,notes, todos, toggleTodo, deleteTodo, editTodo, deleteNote, editNote)
-       addFunc(newItem)
+       //addFunc(newItem)
        setCount(count=> count + 1)
        setNewItem("")
-       
       }
 
   return(
