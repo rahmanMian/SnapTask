@@ -64,9 +64,7 @@ function addNote(title) {
       {id: crypto.randomUUID(), title: title}
     ]
   })
-  
-
-
+  setCount(count => count + 1);
 }
 
 
@@ -147,13 +145,14 @@ function editNote(id, newTitle) {
    </div>
   
   <div className="formContainer">
-   <NewTodoForm addFunc={addTodo} setCount={setCount} addNote={addNote}  notes={notes} todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} deleteNote={deleteNote} editNote={editNote}  />
+   <NewTodoForm addFunc={addTodo} setCount={setCount} addNote={addNote}  />
    </div>
 
   {/* <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo}/>*/}
 
    <div className="noteContainer">
     <div className="notes">
+
     {notes.map((note) => (
     <Note key = {note.id} note={note} deleteNote={deleteNote} editNote={editNote}/>
     ))}

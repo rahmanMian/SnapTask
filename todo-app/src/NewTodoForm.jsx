@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./styles.css"
 
-export function NewTodoForm({addFunc, setCount, addNote, notes, todos, toggleTodo, deleteTodo, editTodo, deleteNote, editNote}){
+export function NewTodoForm({addFunc, setCount, addNote}){
     //addtodo function from app
     
 
