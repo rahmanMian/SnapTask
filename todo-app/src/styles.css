@@ -176,8 +176,8 @@ h1{
       border-radius:10px;
       padding: 1rem;
       min-height: 20vh;
-      min-width: 15vw;
-      max-width: 25vw;
+      width: 20vw;
+   
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -193,6 +193,7 @@ h1{
 
     .delete-icon:hover{
          transform: scale(1.2);
+         cursor: url("./assets/pen.svg"),auto;
     }
 
     .noteContainer{
@@ -203,11 +204,13 @@ h1{
     }
 
     
-    #noteTitle{
-      font-size: 2rem; /* Adjust the font size as needed */
+    .titleInput{
+      font-size: 1.5rem; /* Adjust the font size as needed */
       font-weight: bold; /* Make the text bold */
       color: #333;
       min-width: 20%;
+      max-width: 19vw;
+      margin-bottom: 15vh;
       
     }
 

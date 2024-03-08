@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState, useEffect} from "react";
 
 
 export function NoteTitle({title, id, deleteNote, editNote}){
@@ -15,14 +15,22 @@ export function NoteTitle({title, id, deleteNote, editNote}){
         deleteNote(id);
       };
 
+      useEffect(() => {
+        const textarea = document.getElementById("textarea_" + id);
+        
+       
+        if (textarea) {
+          textarea.style.height = "auto"; // Reset the height to auto to calculate the new height
+          textarea.style.width = "auto";
+          textarea.style.height = textarea.scrollHeight + "px"; // Set the height to the scroll height
+          textarea.style.width = newItem.length*20 + "px";
+        }
+      }, [newItem]);
+
     return(
-        <>
-         <textarea id="noteTitle"  type="text" value= {newItem} onChange={handleEdit}/>
-
-           <button className="singleInput button" onClick={handleDelete}  
-           id="deleteButton">Delete</button>
-
-   </>
-
+      <span id="textPan"> 
+      <textarea   className="titleInput" id={"textarea_" + id} type="text" value= {newItem} onChange={handleEdit}  />
+    </span>
+   
     )
 }

@@ -151,13 +151,13 @@ function editNote(id, newTitle) {
 
 
    <div className="noteContainer">
-    <div className="notes">
+   
 
     {notes.map((note) => (
     <Note key = {note.id} note={note} deleteNote={deleteNote} editNote={editNote}/>
     ))}
    </div>
-   </div>
+  
    
     </>
     )
