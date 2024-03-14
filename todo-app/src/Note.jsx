@@ -27,7 +27,7 @@ export function Note({note, deleteNote, editNote,todos, addTodo, toggleTodo, del
     
      <NoteTitle {...note} title = {note.title} key = {note.id} deleteNote={deleteNote} editNote = {editNote} />
 
-     <FaPlusCircle className="add-icon" onClick={handleToDo} />
+   
 
      {todos
     .filter((todo) => todo.noteID === note.id)
@@ -45,7 +45,7 @@ export function Note({note, deleteNote, editNote,todos, addTodo, toggleTodo, del
     ))
 }
 
-         
+<FaPlusCircle className="add-icon" onClick={handleToDo} />
         
         <div className="note-footer">
             
