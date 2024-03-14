@@ -68,11 +68,11 @@ function addNote(title) {
 }
 
 
-function addTodo(title){
+function addTodo(title, noteID){
   setTodos(currentTodos =>{
     return [
       ...currentTodos,
-      {id:crypto.randomUUID(), title: title, completed:false},
+      {id:crypto.randomUUID(), title: title, completed:false, noteID: noteID},
     ]
    })
 
@@ -145,16 +145,15 @@ function editNote(id, newTitle) {
    </div>
   
   <div className="formContainer">
-   <NewTodoForm addFunc={addTodo} setCount={setCount} addNote={addNote}  />
+   <NewTodoForm setCount={setCount} addNote={addNote} />
    </div>
 
 
 
    <div className="noteContainer">
-   
 
     {notes.map((note) => (
-    <Note key = {note.id} note={note} deleteNote={deleteNote} editNote={editNote}/>
+    <Note key = {note.id} note={note} deleteNote={deleteNote} editNote={editNote} todos={todos} addTodo={addTodo} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} />
     ))}
    </div>
   

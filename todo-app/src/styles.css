@@ -172,12 +172,13 @@ h1{
 
     .note{
       background-color: #fef68a;
+      margin: 20px;
       margin-bottom: 10px;
       border-radius:10px;
       padding: 1rem;
       min-height: 20vh;
       width: 20vw;
-   
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -198,7 +199,8 @@ h1{
 
     .noteContainer{
       margin-top: 40px;
-      width: 100vw;
+      width: 100%;
+      flex-wrap: wrap;
       display: flex;
       justify-content: center;
     }
@@ -210,8 +212,12 @@ h1{
       color: #333;
       min-width: 20%;
       max-width: 19vw;
-      margin-bottom: 15vh;
+      margin-bottom: 0;
       
     }
 
+    #todoAdd{
+      margin: 0;
+      border: none;
+    }
     

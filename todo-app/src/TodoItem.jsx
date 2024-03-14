@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-export function TodoItem({completed, id, title, toggleTodo, deleteTodo, editTodo, deleteNote, noteId}){
-  const [newItem, setNewItem] = useState(title); 
+export function TodoItem({completed, id, title, toggleTodo, deleteTodo, editTodo, noteId}){
+  const [newItem, setNewItem] = useState(title || "  "); 
 
   const handleEdit = (e) => {
     const newTitle = e.target.value;
@@ -13,12 +13,10 @@ export function TodoItem({completed, id, title, toggleTodo, deleteTodo, editTodo
 
   const handleDelete = () => {
     deleteTodo(id);
-   
   };
  
   useEffect(() => {
     const textarea = document.getElementById("textarea_" + id);
-    
    
     if (textarea) {
       textarea.style.height = "auto"; // Reset the height to auto to calculate the new height
@@ -27,8 +25,6 @@ export function TodoItem({completed, id, title, toggleTodo, deleteTodo, editTodo
       textarea.style.width = newItem.length*13 + "px";
     }
   }, [newItem]);
-
-
   
     return (
     <li>
