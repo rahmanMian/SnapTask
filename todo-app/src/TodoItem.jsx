@@ -40,3 +40,20 @@ export function TodoItem({completed, id, title, toggleTodo, deleteTodo, editTodo
 </li>
     )
 }
+
+/*
+     {todos
+    .filter((todo) => todo.noteID === note.id)
+    .map((todo) => (
+        <TodoItem
+        key={todo.id}
+        completed={todo.completed}
+        id={todo.id}
+        title={todo.title}
+        toggleTodo={toggleTodo}
+        deleteTodo={deleteTodo}
+        editTodo={editTodo}
+        noteId={todo.noteID}
+        />
+    ))
+}*/

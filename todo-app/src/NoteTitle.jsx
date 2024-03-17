@@ -1,7 +1,8 @@
 import { useState, useEffect} from "react";
+import { TodoItem } from "./TodoItem"
 
 
-export function NoteTitle({title, id, deleteNote, editNote}){
+export function NoteTitle({title, id, deleteNote, editNote,todos, addTodo, toggleTodo, deleteTodo, editTodo}){
 
     const [newItem, setNewItem] = useState(title); 
 
@@ -28,9 +29,28 @@ export function NoteTitle({title, id, deleteNote, editNote}){
       }, [newItem]);
 
     return(
+      <>
       <span id="textPan"> 
       <textarea   className="titleInput" id={"textarea_" + id} type="text" value= {newItem} onChange={handleEdit}  />
     </span>
+    
+    {todos
+    .filter((todo) => todo.noteID === id)
+    .map((todo) => (
+        <TodoItem
+        key={todo.id}
+        completed={todo.completed}
+        id={todo.id}
+        title={todo.title}
+        toggleTodo={toggleTodo}
+        deleteTodo={deleteTodo}
+        editTodo={editTodo}
+        noteId={todo.noteID}
+        />
+    ))
+}
+
+</>
    
     )
 }

@@ -25,25 +25,8 @@ export function Note({note, deleteNote, editNote,todos, addTodo, toggleTodo, del
 
     return <div className='note'>
     
-     <NoteTitle {...note} title = {note.title} key = {note.id} deleteNote={deleteNote} editNote = {editNote} />
+     <NoteTitle {...note} title = {note.title} key = {note.id} deleteNote={deleteNote} editNote = {editNote} todos={todos} addTodo={addTodo} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} />
 
-   
-
-     {todos
-    .filter((todo) => todo.noteID === note.id)
-    .map((todo) => (
-        <TodoItem
-        key={todo.id}
-        completed={todo.completed}
-        id={todo.id}
-        title={todo.title}
-        toggleTodo={toggleTodo}
-        deleteTodo={deleteTodo}
-        editTodo={editTodo}
-        noteId={todo.noteID}
-        />
-    ))
-}
 
 <FaPlusCircle className="add-icon" onClick={handleToDo} />
         
@@ -54,4 +37,7 @@ export function Note({note, deleteNote, editNote,todos, addTodo, toggleTodo, del
         </div>
     </div>
 };
+
+
+
 
