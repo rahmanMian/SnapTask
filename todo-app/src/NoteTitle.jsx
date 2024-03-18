@@ -60,7 +60,12 @@ export function NoteTitle({title, id, deleteNote, editNote,todos, addTodo, toggl
 }*/
 
 import { useState, useEffect } from "react";
-import { TodoItem } from "./TodoItem";
+import {MdDeleteForever} from 'react-icons/md';
+import { FaPlusCircle } from "react-icons/fa";
+import { TodoItem } from "./TodoItem"
+import { NewTodoForm } from './NewTodoForm';
+import { NoteList } from './NoteList';
+
 
 export function NoteTitle({ title, id, deleteNote, editNote, todos, addTodo, toggleTodo, deleteTodo, editTodo }) {
     const [newItem, setNewItem] = useState(title);
@@ -85,6 +90,21 @@ export function NoteTitle({ title, id, deleteNote, editNote, todos, addTodo, tog
         }
     }, [newItem]);
 
+    
+    const [isClicked, setIsClicked] = useState(false);
+
+    const handleDeleteNote = () => {
+        deleteNote(id);
+      };
+
+    const handleToDo = () => {
+     addTodo("",id);
+    };
+
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleDateString('en-US', { month: 'numeric', day: 'numeric', year: '2-digit' });
+
+
     return (
         <div className="note">
             <span id="textPan">
@@ -107,6 +127,13 @@ export function NoteTitle({ title, id, deleteNote, editNote, todos, addTodo, tog
                         />
                     ))}
             </div>
+            <FaPlusCircle className="add-icon" onClick={handleToDo} />
+        
+        <div className="note-footer">
+            
+            <small>{formattedDate}</small>
+            <MdDeleteForever  className='delete-icon' size="1.3rem" onClick={handleDeleteNote}/>
+        </div>
         </div>
     );
 }
