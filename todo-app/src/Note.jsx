@@ -10,8 +10,6 @@ export function Note({note, deleteNote, editNote,todos, addTodo, toggleTodo, del
 
 
 
-     
-
     return <div>
     
      <NoteTitle {...note} title = {note.title} key = {note.id} deleteNote={deleteNote} editNote = {editNote} todos={todos} addTodo={addTodo} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} />

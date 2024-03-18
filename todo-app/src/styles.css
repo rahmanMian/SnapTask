@@ -3,6 +3,8 @@
    
   }
 
+
+
 .headContainer{
     display: flex;
     height: 10vh;
@@ -51,6 +53,10 @@ h1{
     .headContainer {
        justify-content: center;
  }
+}
+
+@media (min-width: 768px){
+
 }
 
 .form-row{
@@ -115,7 +121,12 @@ h1{
     color: white;
     font-size: 0.8em;
   }
-
+  
+  .add-icon{
+    margin-left: 3.32vw;
+    margin-bottom: 30px;
+    margin-top: 20px;
+  }
 
 
   li{
@@ -127,7 +138,7 @@ h1{
 
   .singleInput{
     margin-left: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     background-color: #fef68a;
   }
 
@@ -160,7 +171,7 @@ h1{
       font-family: "Roboto Slab";
       overflow-y: hidden;
       resize: none;
-      max-width: 15vw;
+      max-width: 10vw;
       
     }
 
@@ -172,18 +183,20 @@ h1{
 
     .note{
       background-color: #fef68a;
-      margin: 20px;
-      margin-bottom: 10px;
+      margin: 7px;
       border-radius:10px;
       padding: 1rem;
       min-height: 20vh;
       width: 20vw;
+      min-width:300px;
       box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
 
     }
+
+
 
     .note-footer{
       display: flex;
