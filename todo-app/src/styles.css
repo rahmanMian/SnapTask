@@ -110,6 +110,7 @@ h1{
     font-size: 0.7rem;
     width: 65px;
     height: 25px;
+    transform: translateY(-10px);
 
   }
 
@@ -142,6 +143,7 @@ h1{
 
   textarea{
     background-color: #fef68a;
+    transform: translateY(20px);
   }
 
 
@@ -174,7 +176,6 @@ h1{
     }
 
     textarea:hover{
-      border: 2px solid black;
       resize: none;
     }
 
@@ -237,4 +238,13 @@ h1{
       margin: 0;
       border: none;
     }
+    
+
+
+      @media (max-width: 1000px) {
+        .noteContainer {
+           columns: 1;
+     }
+    }
+      
     

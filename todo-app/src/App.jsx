@@ -129,7 +129,7 @@ export default function App() {
             </div>
             <DragDropContext onDragEnd={handleOnDragEnd}>
                 <div className="noteContainer">
-                    <Droppable droppableId="dropNotes" >
+                    <Droppable droppableId="dropNotes" direction="horizontal" >
                         {(provided) => (
                             <ul
                                 className="NoteList"
