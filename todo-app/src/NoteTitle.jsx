@@ -4,7 +4,7 @@ import {MdDeleteForever} from 'react-icons/md';
 import { FaPlusCircle } from "react-icons/fa";
 import { TodoItem } from "./TodoItem"
 import { NewTodoForm } from './NewTodoForm';
-import { NoteList } from './NoteList';
+
 
 
 export function NoteTitle({ title, id, deleteNote, editNote, todos, addTodo, toggleTodo, deleteTodo, editTodo }) {

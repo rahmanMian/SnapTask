@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid'; // Import uuidv4 for generating unique IDs
 import { NewTodoForm } from "./NewTodoForm";
-import { TodoList } from "./TodoList";
 import todoLogo from "./assets/todologo.png";
 import { Note } from "./Note";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 export default function App() {
-    const [notebullet, updateNoteBullet] = useState();
+    const [notebullet, updateNoteBullet] = useState([]);
     
     const [count, setCount] = useState(() => {
         const storedNumber = localStorage.getItem('COUNT');
@@ -96,19 +95,20 @@ export default function App() {
     }
 
     function handleOnDragEnd(result) {
-      // Check if the drag operation is completed and dropped in a valid destination
-      if (!result.destination) {
-        return; // If not, do nothing
-      }
+        const { source, destination } = result;
     
-      // Reorder the items based on the drag result
-      const reorderedNotes = Array.from(notes);
-      const [reorderedItem] = reorderedNotes.splice(result.source.index, 1);
-      reorderedNotes.splice(result.destination.index, 0, reorderedItem);
+        // dropped outside the list
+        if (!destination) {
+            return;
+        }
     
-      // Update the state with the reordered notes
-      setNotes(reorderedNotes);
+        const newNotes = Array.from(notes);
+        const [removed] = newNotes.splice(source.index, 1);
+        newNotes.splice(destination.index, 0, removed);
+
+        setNotes(newNotes);
     }
+    
     
   
 
@@ -127,11 +127,12 @@ export default function App() {
             <div className="formContainer">
                 <NewTodoForm setCount={setCount} addNote={addNote} />
             </div>
+            
             <DragDropContext onDragEnd={handleOnDragEnd}>
                 <div className="noteContainer">
-                    <Droppable droppableId="dropNotes" direction="horizontal" >
+                    <Droppable droppableId="dropNotes">
                         {(provided) => (
-                            <ul
+                            <div 
                                 className="NoteList"
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}
@@ -143,7 +144,7 @@ export default function App() {
                                         index={index}
                                     >
                                         {(provided) => (
-                                            <li
+                                            <div className="no"
                                                 ref={provided.innerRef}
                                                 {...provided.draggableProps}
                                                 {...provided.dragHandleProps}
@@ -159,16 +160,17 @@ export default function App() {
                                                     deleteTodo={deleteTodo}
                                                     editTodo={editTodo}
                                                 />
-                                            </li>
+                                            </div>
                                         )}
                                     </Draggable>
                                 ))}
                                 {provided.placeholder}
-                            </ul>
+                            </div>
                         )}
                     </Droppable>
                 </div>
-            </DragDropContext>
+                </DragDropContext>
+       
         </>
     );
 }
