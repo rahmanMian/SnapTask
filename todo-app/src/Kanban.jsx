@@ -3,19 +3,11 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import Column from "./Column";
 
 export default function KanbanBoard({ notes, deleteNote, editNote, todos, addTodo, toggleTodo, deleteTodo, editTodo }) {
-    const [toDoNotes, setToDoNotes] = useState([]);
-    const [doneNotes, setDoneNotes] = useState([]);
-    const [backlogNotes, setBacklogNotes] = useState([]);
+    const [boardNotes, setBoardNotes] = useState([]);
 
-    // Initialize the notes in the respective columns
+    // Initialize the board notes
     useEffect(() => {
-        const toDo = notes.filter(note => note.status === "To Do");
-        const done = notes.filter(note => note.status === "Done");
-        const backlog = notes.filter(note => note.status === "Backlog");
-
-        setToDoNotes(toDo);
-        setDoneNotes(done);
-        setBacklogNotes(backlog);
+        setBoardNotes(notes);
     }, [notes]);
 
     const handleDragEnd = (result) => {
@@ -27,94 +19,42 @@ export default function KanbanBoard({ notes, deleteNote, editNote, todos, addTod
         // If dropped in the same column and position, return
         if (source.droppableId === destination.droppableId && source.index === destination.index) return;
     
-        // Find the dragged note
-        const draggedNote = notes.find(note => note.id === draggableId);
-        if (!draggedNote) return;
+        // Create a copy of the board notes
+        const updatedNotes = Array.from(boardNotes);
+    
+        // Remove the dragged note from its original position
+        const [reorderedItem] = updatedNotes.splice(source.index, 1);
+    
+        // Add the dragged note to the new position
+        updatedNotes.splice(destination.index, 0, reorderedItem);
     
         // Update the status of the dragged note based on the destination column
-        let updatedStatus;
-        switch (destination.droppableId) {
-            case "to-do":
-                updatedStatus = "To Do";
-                break;
-            case "done":
-                updatedStatus = "Done";
-                break;
-            case "backlog":
-                updatedStatus = "Backlog";
-                break;
-            default:
-                break;
-        }
+        const updatedStatus = destination.droppableId;
+        reorderedItem.status = updatedStatus;
     
-        // Update the status and order of the dragged note
-        const updatedNotes = notes.map(note => {
-            if (note.id === draggedNote.id) {
-                return { ...note, status: updatedStatus };
-            } else {
-                return note;
+   
+    
+        // Update the status of the dragged note in the external notes array
+        const updatedExternalNotes = notes.map(note => {
+            if (note.id === draggableId) {
+                return { ...note, status: updatedStatus};
             }
+            return note;
         });
     
-        // Reorder the notes within the source and destination columns
-        const sourceColumn = updatedNotes.filter(note => note.status === draggedNote.status);
-        const destinationColumn = source.droppableId === destination.droppableId ? sourceColumn : updatedNotes.filter(note => note.status === updatedStatus);
-        const updatedSource = Array.from(sourceColumn);
-        const updatedDestination = Array.from(destinationColumn);
-        updatedSource.splice(source.index, 1);
-        updatedDestination.splice(destination.index, 0, draggedNote);
-    
-        // Update the state of notes
-        const updatedNotesAfterReorder = updatedNotes.map(note => {
-            if (updatedSource.find(n => n.id === note.id)) {
-                return updatedSource.find(n => n.id === note.id);
-            } else if (updatedDestination.find(n => n.id === note.id)) {
-                return updatedDestination.find(n => n.id === note.id);
-            } else {
-                return note;
-            }
-        });
-    
-        // Update the state of notes
-        setNotes(updatedNotesAfterReorder);
-    
-        // Update the state of columns
-        switch (source.droppableId) {
-            case "to-do":
-                setToDoNotes(updatedSource);
-                break;
-            case "done":
-                setDoneNotes(updatedSource);
-                break;
-            case "backlog":
-                setBacklogNotes(updatedSource);
-                break;
-            default:
-                break;
-        }
-        switch (destination.droppableId) {
-            case "to-do":
-                setToDoNotes(updatedDestination);
-                break;
-            case "done":
-                setDoneNotes(updatedDestination);
-                break;
-            case "backlog":
-                setBacklogNotes(updatedDestination);
-                break;
-            default:
-                break;
-        }
+        // Update the state of external notes
+        setBoardNotes(updatedExternalNotes);
     };
     
+
     return (
         <DragDropContext onDragEnd={handleDragEnd}>
             <h2 style={{ textAlign: "center" }}>Progress Board</h2>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexDirection: "row" }}>
                 <Column
-                    title="To Do"
+                    title="to-do"
                     id="to-do"
-                    notes={toDoNotes}
+                    notes={boardNotes.filter(note => note.status === "to-do")}
                     deleteNote={deleteNote}
                     editNote={editNote}
                     todos={todos}
@@ -124,9 +64,9 @@ export default function KanbanBoard({ notes, deleteNote, editNote, todos, addTod
                     editTodo={editTodo}
                 />
                 <Column
-                    title="Done"
+                    title="done"
                     id="done"
-                    notes={doneNotes}
+                    notes={boardNotes.filter(note => note.status === "done")}
                     deleteNote={deleteNote}
                     editNote={editNote}
                     todos={todos}
@@ -136,9 +76,9 @@ export default function KanbanBoard({ notes, deleteNote, editNote, todos, addTod
                     editTodo={editTodo}
                 />
                 <Column
-                    title="Backlog"
+                    title="backlog"
                     id="backlog"
-                    notes={backlogNotes}
+                    notes={boardNotes.filter(note => note.status === "backlog")}
                     deleteNote={deleteNote}
                     editNote={editNote}
                     todos={todos}

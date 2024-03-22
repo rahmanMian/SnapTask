@@ -47,7 +47,7 @@ export default function App() {
         const newNote = {
             id: uuidv4(), // Generate unique ID for note
             title: title,
-            status: "To Do"
+            status: "to-do"
         };
         setNotes(prevNotes => [...prevNotes, newNote]);
         setCount(prevCount => prevCount + 1);
@@ -95,6 +95,8 @@ export default function App() {
         setNotes(prevNotes => prevNotes.filter(note => note.id !== id));
         setCount(prevCount => prevCount - 1);
     }
+
+
 
     function handleOnDragEnd(result) {
         const { source, destination } = result;
