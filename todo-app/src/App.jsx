@@ -4,6 +4,7 @@ import { NewTodoForm } from "./NewTodoForm";
 import todoLogo from "./assets/todologo.png";
 import { Note } from "./Note";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import KanbanBoard from "./Kanban";
 
 export default function App() {
     const [notebullet, updateNoteBullet] = useState([]);
@@ -45,7 +46,8 @@ export default function App() {
     function addNote(title) {
         const newNote = {
             id: uuidv4(), // Generate unique ID for note
-            title: title
+            title: title,
+            status: "To Do"
         };
         setNotes(prevNotes => [...prevNotes, newNote]);
         setCount(prevCount => prevCount + 1);
@@ -114,6 +116,7 @@ export default function App() {
 
     return (
         <>
+        
             <div className="headContainer">
                 <div className="lineGrid">
                     <hr />
@@ -127,50 +130,14 @@ export default function App() {
             <div className="formContainer">
                 <NewTodoForm setCount={setCount} addNote={addNote} />
             </div>
-            
-            <DragDropContext onDragEnd={handleOnDragEnd}>
-                <div className="noteContainer">
-                    <Droppable droppableId="dropNotes">
-                        {(provided) => (
-                            <div 
-                                className="NoteList"
-                                {...provided.droppableProps}
-                                ref={provided.innerRef}
-                            >
-                                {notes.map((note, index) => (
-                                    <Draggable
-                                        key={note.id}
-                                        draggableId={note.id}
-                                        index={index}
-                                    >
-                                        {(provided) => (
-                                            <div className="no"
-                                                ref={provided.innerRef}
-                                                {...provided.draggableProps}
-                                                {...provided.dragHandleProps}
-                                            >
-                                                <Note
-                                                    key={note.id}
-                                                    note={note}
-                                                    deleteNote={deleteNote}
+        
+                         <KanbanBoard notes={notes}  deleteNote={deleteNote}
                                                     editNote={editNote}
                                                     todos={todos}
                                                     addTodo={addTodo}
                                                     toggleTodo={toggleTodo}
                                                     deleteTodo={deleteTodo}
-                                                    editTodo={editTodo}
-                                                />
-                                            </div>
-                                        )}
-                                    </Draggable>
-                                ))}
-                                {provided.placeholder}
-                            </div>
-                        )}
-                    </Droppable>
-                </div>
-                </DragDropContext>
-       
+                                                    editTodo={editTodo}/>               
         </>
     );
 }

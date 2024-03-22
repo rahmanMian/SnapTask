@@ -4,10 +4,11 @@ import {MdDeleteForever} from 'react-icons/md';
 import { FaPlusCircle } from "react-icons/fa";
 import { TodoItem } from "./TodoItem"
 import { NewTodoForm } from './NewTodoForm';
+import { Draggable } from "react-beautiful-dnd";
 
 
 
-export function NoteTitle({ title, id, deleteNote, editNote, todos, addTodo, toggleTodo, deleteTodo, editTodo }) {
+export function NoteTitle({ title, id, deleteNote, editNote, todos, addTodo, toggleTodo, deleteTodo, editTodo, index }) {
     const [newItem, setNewItem] = useState(title);
 
     const handleEdit = (e) => {
@@ -46,6 +47,9 @@ export function NoteTitle({ title, id, deleteNote, editNote, todos, addTodo, tog
 
 
     return (
+        <Draggable draggableId={id} key={id} index={index}>
+        {(provided, snapshot) =>(
+         <div className="container" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} isDragging={snapshot.isDragging}>  
         <div className="note">
             <span id="textPan">
                 <textarea className="titleInput" id={"textarea_" + id} type="text" value={newItem} onChange={handleEdit} />
@@ -75,5 +79,9 @@ export function NoteTitle({ title, id, deleteNote, editNote, todos, addTodo, tog
             <MdDeleteForever  className='delete-icon' size="1.3rem" onClick={handleDeleteNote}/>
         </div>
         </div>
+        {provided.placeholder}
+        </div> 
+        )}
+        </Draggable>
     );
 }

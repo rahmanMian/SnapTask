@@ -5,13 +5,13 @@ import { NewTodoForm } from './NewTodoForm';
 import { NoteTitle } from './NoteTitle';
 import React, { useState } from 'react';
 
-export function Note({note, deleteNote, editNote,todos, addTodo, toggleTodo, deleteTodo, editTodo}){
+export function Note({note, deleteNote, editNote,todos, addTodo, toggleTodo, deleteTodo, editTodo, index}){
 
 
 
     return <div>
     
-     <NoteTitle {...note} title = {note.title} key = {note.id} deleteNote={deleteNote} editNote = {editNote} todos={todos} addTodo={addTodo} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} />
+     <NoteTitle {...note} title = {note.title} key = {note.id} deleteNote={deleteNote} editNote = {editNote} todos={todos} addTodo={addTodo} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} index={index} />
 
 
 
