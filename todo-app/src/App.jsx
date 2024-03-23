@@ -98,21 +98,7 @@ export default function App() {
 
 
 
-    function handleOnDragEnd(result) {
-        const { source, destination } = result;
-    
-        // dropped outside the list
-        if (!destination) {
-            return;
-        }
-    
-        const newNotes = Array.from(notes);
-        const [removed] = newNotes.splice(source.index, 1);
-        newNotes.splice(destination.index, 0, removed);
-
-        setNotes(newNotes);
-    }
-    
+   
     
   
 
@@ -133,7 +119,8 @@ export default function App() {
                 <NewTodoForm setCount={setCount} addNote={addNote} />
             </div>
         
-                         <KanbanBoard notes={notes}  deleteNote={deleteNote}
+                         <KanbanBoard notes={notes} setNotes={setNotes}  
+                                                  deleteNote={deleteNote}
                                                     editNote={editNote}
                                                     todos={todos}
                                                     addTodo={addTodo}

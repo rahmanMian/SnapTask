@@ -7,7 +7,7 @@ import { Note } from "./Note";
 const Container = styled.div`
     background-color: #f4f5f7;
     border-radius: 2.5px;
-    width: 400px;
+    width: 700px;
     height: 900px;
     overflow-y: scroll;
     -ms-overflow-style: none;
