@@ -47,8 +47,25 @@ export default function App() {
         const newNote = {
             id: uuidv4(), // Generate unique ID for note
             title: title,
-            status: "to-do"
+            status: ""
         };
+    
+        // Add status property based on the count state
+        switch (count % 3) {
+            case 0:
+                newNote.status = "to-do";
+                break;
+            case 2:
+                newNote.status = "done";
+                break;
+            case 1:
+                newNote.status = "backlog";
+                break;
+            default:
+                newNote.status = ""; // Default to "to-do" if count state is not divisible by 3
+                break;
+        }
+    
         setNotes(prevNotes => [...prevNotes, newNote]);
         setCount(prevCount => prevCount + 1);
     }

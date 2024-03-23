@@ -7,23 +7,15 @@ export default function KanbanBoard({ notes, deleteNote, editNote, todos, addTod
     const [doneNotes, setDoneNotes] = useState([]);
     const [backlogNotes, setBacklogNotes] = useState([]);
 
-    // Initialize the notes in each column from local storage or props
-    useEffect(() => {
-        const storedToDoNotes = JSON.parse(localStorage.getItem('toDoNotes')) || notes.filter(note => note.status === "to-do");
-        const storedDoneNotes = JSON.parse(localStorage.getItem('doneNotes')) || notes.filter(note => note.status === "done");
-        const storedBacklogNotes = JSON.parse(localStorage.getItem('backlogNotes')) || notes.filter(note => note.status === "backlog");
-        
-        setToDoNotes(storedToDoNotes);
-        setDoneNotes(storedDoneNotes);
-        setBacklogNotes(storedBacklogNotes);
-    }, [notes]);
+
 
     // Update local storage whenever notes change
     useEffect(() => {
-        localStorage.setItem('toDoNotes', JSON.stringify(toDoNotes));
-        localStorage.setItem('doneNotes', JSON.stringify(doneNotes));
-        localStorage.setItem('backlogNotes', JSON.stringify(backlogNotes));
-    }, [toDoNotes, doneNotes, backlogNotes]);
+       setToDoNotes(notes.filter(note => note.status === "to-do"));
+       setDoneNotes(notes.filter(note => note.status === "done"));
+       setBacklogNotes(notes.filter(note => note.status === "backlog"));
+      
+    }, [notes]);
 
     const handleDragEnd = (result) => {
         const { destination, source, draggableId } = result;
