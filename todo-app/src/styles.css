@@ -243,4 +243,19 @@ h1{
      }
     }
       
+    .column{
+      margin: 0;
+      border: 0;
+    }
+
+    .container{
+      margin: 0;
+      border: 0;
+    }
     
+    .tafa{
+      width: 90%;
+      transform: translateX(70px);
+      margin-top: 50px;
+      background-color: white;
+    }
