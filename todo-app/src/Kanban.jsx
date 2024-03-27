@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { DragDropContext } from 'react-beautiful-dnd';
 import Column from "./Column";
 
-export default function KanbanBoard({ notes, deleteNote, editNote, todos, addTodo, toggleTodo, deleteTodo, editTodo }) {
+export default function KanbanBoard({ notes, editStatusNote, deleteNote, editNote, todos, addTodo, toggleTodo, deleteTodo, editTodo }) {
     const [toDoNotes, setToDoNotes] = useState([]);
     const [doneNotes, setDoneNotes] = useState([]);
     const [backlogNotes, setBacklogNotes] = useState([]);
@@ -11,12 +11,22 @@ export default function KanbanBoard({ notes, deleteNote, editNote, todos, addTod
 
     // Update local storage whenever notes change
     useEffect(() => {
-       setToDoNotes(notes.filter(note => note.status === "to-do") || []);
-       setDoneNotes(notes.filter(note => note.status === "done") || []);
-       setBacklogNotes(notes.filter(note => note.status === "backlog") || []);
+        setToDoNotes(notes.filter(note => note.status === "to-do"));
     }, [notes]);
-
+    
+    useEffect(() => {
+        setDoneNotes(notes.filter(note => note.status === "done"));
+    }, [notes]);
+    
+    useEffect(() => {
+        setBacklogNotes(notes.filter(note => note.status === "backlog"));
+    }, [notes]);
+    
     const handleDragEnd = (result) => {
+        console.log(toDoNotes);
+        console.log(doneNotes);
+        console.log(backlogNotes);
+        console.log("---");
         const { destination, source, draggableId } = result;
 
         // If dropped outside the list, return
@@ -44,12 +54,15 @@ export default function KanbanBoard({ notes, deleteNote, editNote, todos, addTod
         switch (destination.droppableId) {
             case "to-do":
                 destinationColumn = toDoNotes;
+                editStatusNote(draggableId, "to-do");
                 break;
             case "done":
                 destinationColumn = doneNotes;
+                editStatusNote(draggableId, "done");
                 break;
             case "backlog":
                 destinationColumn = backlogNotes;
+                editStatusNote(draggableId, "backlog");
                 break;
             default:
                 break;

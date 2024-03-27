@@ -96,6 +96,14 @@ export default function App() {
         );
     }
 
+    function editNoteStatus(id, newStatus) {
+        setNotes(prevNotes =>
+            prevNotes.map(note =>
+                note.id === id ? { ...note, status: newStatus } : note
+            )
+        );
+    }
+
     function toggleTodo(id, completed) {
         setTodos(prevTodos =>
             prevTodos.map(todo =>
@@ -136,7 +144,7 @@ export default function App() {
                 <NewTodoForm setCount={setCount} addNote={addNote} />
             </div>
         
-                         <KanbanBoard notes={notes} setNotes={setNotes}  
+                         <KanbanBoard notes={notes} editStatusNote={editNoteStatus}  
                                                   deleteNote={deleteNote}
                                                     editNote={editNote}
                                                     todos={todos}
