@@ -6,10 +6,11 @@ import { Note } from "./Note";
 
 const Container = styled.div`
     background-color: white;
-    width: 700px;
-    height: 900px;
-    border: none;
+    width: 100vw/3e;
+    height:100vh;
     overflow:hidden;
+    margin: 0;
+    border: none;
 `;
 
 

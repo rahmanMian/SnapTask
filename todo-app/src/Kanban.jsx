@@ -11,12 +11,9 @@ export default function KanbanBoard({ notes, deleteNote, editNote, todos, addTod
 
     // Update local storage whenever notes change
     useEffect(() => {
-        console.log(notes);
-        if (notes.length !== 0){
-       setToDoNotes(notes.filter(note => note.status === "to-do") );
+       setToDoNotes(notes.filter(note => note.status === "to-do") || []);
        setDoneNotes(notes.filter(note => note.status === "done") || []);
        setBacklogNotes(notes.filter(note => note.status === "backlog") || []);
-        }
     }, [notes]);
 
     const handleDragEnd = (result) => {
@@ -120,8 +117,8 @@ export default function KanbanBoard({ notes, deleteNote, editNote, todos, addTod
 
     return (
         <DragDropContext onDragEnd={handleDragEnd}>
-            <h2 style={{ textAlign: "center" }}>Progress Board</h2>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexDirection: "row" }}>
+
+            <div style={{ display: "flex", alignItems: "center", flexDirection: "row" }}>
                 <Column
                     title="To Do"
                     id="to-do"
