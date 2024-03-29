@@ -2,31 +2,8 @@ import React, { useState, useEffect } from "react";
 import { DragDropContext } from 'react-beautiful-dnd';
 import Column from "./Column";
 
-export default function KanbanBoard({ notes, editStatusNote, deleteNote, editNote, todos, addTodo, toggleTodo, deleteTodo, editTodo }) {
-    const [toDoNotes, setToDoNotes] = useState([]);
-    const [doneNotes, setDoneNotes] = useState([]);
-    const [backlogNotes, setBacklogNotes] = useState([]);
-
-
-
-    // Update local storage whenever notes change
-    useEffect(() => {
-        setToDoNotes(notes.filter(note => note.status === "to-do"));
-    }, [notes]);
-    
-    useEffect(() => {
-        setDoneNotes(notes.filter(note => note.status === "done"));
-    }, [notes]);
-    
-    useEffect(() => {
-        setBacklogNotes(notes.filter(note => note.status === "backlog"));
-    }, [notes]);
-    
+export default function KanbanBoard({ toDoNotes, doneNotes, backlogNotes, setToDoNotes, setDoneNotes, setBacklogNotes, editStatusNote, deleteNote, editNote, todos, addTodo, toggleTodo, deleteTodo, editTodo }) {
     const handleDragEnd = (result) => {
-        console.log(toDoNotes);
-        console.log(doneNotes);
-        console.log(backlogNotes);
-        console.log("---");
         const { destination, source, draggableId } = result;
 
         // If dropped outside the list, return
@@ -54,83 +31,59 @@ export default function KanbanBoard({ notes, editStatusNote, deleteNote, editNot
         switch (destination.droppableId) {
             case "to-do":
                 destinationColumn = toDoNotes;
-                editStatusNote(draggableId, "to-do");
                 break;
             case "done":
                 destinationColumn = doneNotes;
-                editStatusNote(draggableId, "done");
                 break;
             case "backlog":
                 destinationColumn = backlogNotes;
-                editStatusNote(draggableId, "backlog");
                 break;
             default:
                 break;
         }
 
-        // If the note is dragged within the same column
-        if (source.droppableId === destination.droppableId) {
-            // Create a copy of the source column
-            const updatedColumn = Array.from(sourceColumn);
-            // Remove the dragged note from its original position
-            const [draggedNote] = updatedColumn.splice(source.index, 1);
-            // Insert the dragged note at the new position
-            updatedColumn.splice(destination.index, 0, draggedNote);
-            // Update the state of the respective column notes array
-            switch (source.droppableId) {
-                case "to-do":
-                    setToDoNotes(updatedColumn);
-                    break;
-                case "done":
-                    setDoneNotes(updatedColumn);
-                    break;
-                case "backlog":
-                    setBacklogNotes(updatedColumn);
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            // If the note is dragged to a different column
-            // Remove the dragged note from the source column
-            const updatedSource = Array.from(sourceColumn);
-            const [draggedNote] = updatedSource.splice(source.index, 1);
-            // Add the dragged note to the destination column at the specified position
-            const updatedDestination = Array.from(destinationColumn);
-            updatedDestination.splice(destination.index, 0, draggedNote);
-            // Update the state of the source and destination column notes arrays
-            switch (source.droppableId) {
-                case "to-do":
-                    setToDoNotes(updatedSource);
-                    break;
-                case "done":
-                    setDoneNotes(updatedSource);
-                    break;
-                case "backlog":
-                    setBacklogNotes(updatedSource);
-                    break;
-                default:
-                    break;
-            }
-            switch (destination.droppableId) {
-                case "to-do":
-                    setToDoNotes(updatedDestination);
-                    break;
-                case "done":
-                    setDoneNotes(updatedDestination);
-                    break;
-                case "backlog":
-                    setBacklogNotes(updatedDestination);
-                    break;
-                default:
-                    break;
-            }
+        // Create a copy of the source column
+        const updatedSource = Array.from(sourceColumn);
+        // Remove the dragged note from the source column
+        const [draggedNote] = updatedSource.splice(source.index, 1);
+
+        // Create a copy of the destination column
+        const updatedDestination = Array.from(destinationColumn);
+        // Insert the dragged note at the new position
+        updatedDestination.splice(destination.index, 0, draggedNote);
+
+        // Update the state of the source and destination column notes arrays
+        switch (source.droppableId) {
+            case "to-do":
+                setToDoNotes(updatedSource);
+                break;
+            case "done":
+                setDoneNotes(updatedSource);
+                break;
+            case "backlog":
+                setBacklogNotes(updatedSource);
+                break;
+            default:
+                break;
+        }
+
+        switch (destination.droppableId) {
+            case "to-do":
+                setToDoNotes(updatedDestination);
+                break;
+            case "done":
+                setDoneNotes(updatedDestination);
+                break;
+            case "backlog":
+                setBacklogNotes(updatedDestination);
+                break;
+            default:
+                break;
         }
     };
 
     return (
         <DragDropContext onDragEnd={handleDragEnd}>
-
             <div style={{ display: "flex", alignItems: "center", flexDirection: "row" }}>
                 <Column
                     title="To Do"

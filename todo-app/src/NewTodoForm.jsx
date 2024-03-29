@@ -12,7 +12,6 @@ export function NewTodoForm({setCount, addNote}){
         e.preventDefault();
        if(newItem  === "") return
        addNote(newItem)
-       //addFunc(newItem)
        setCount(count=> count + 1)
        setNewItem("")
       }
@@ -24,7 +23,6 @@ export function NewTodoForm({setCount, addNote}){
     
     <div className="form-row">
      <input  id = "addInput" placeholder="Add a note..." value={newItem} onChange={e=> setNewItem(e.target.value)}/>
-     <button id="addButton" type = "submit" className="button">Add</button>
     </div>
     
     

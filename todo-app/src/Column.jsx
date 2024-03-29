@@ -6,9 +6,8 @@ import { Note } from "./Note";
 
 const Container = styled.div`
     background-color: white;
-    width: 100vw/3e;
+    width: 100vw/3;
     height:100vh;
-    overflow:hidden;
     margin: 0;
     border: none;
 `;

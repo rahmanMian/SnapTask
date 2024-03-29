@@ -8,17 +8,17 @@ import { Draggable } from "react-beautiful-dnd";
 
 
 
-export function NoteTitle({ title, id, deleteNote, editNote, todos, addTodo, toggleTodo, deleteTodo, editTodo, index }) {
+export function NoteTitle({ title,status, id, deleteNote, editNote, todos, addTodo, toggleTodo, deleteTodo, editTodo, index }) {
     const [newItem, setNewItem] = useState(title);
 
     const handleEdit = (e) => {
         const newTitle = e.target.value;
         setNewItem(newTitle);
-        editNote(id, newTitle);
+        editNote(id, newTitle, status);
     };
 
     const handleDelete = () => {
-        deleteNote(id);
+        deleteNote(id, status);
     };
 
     useEffect(() => {
@@ -35,7 +35,7 @@ export function NoteTitle({ title, id, deleteNote, editNote, todos, addTodo, tog
     const [isClicked, setIsClicked] = useState(false);
 
     const handleDeleteNote = () => {
-        deleteNote(id);
+        deleteNote(id, status);
       };
 
     const handleToDo = () => {
