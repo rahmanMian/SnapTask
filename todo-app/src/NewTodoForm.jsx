@@ -10,10 +10,9 @@ export function NewTodoForm({setCount, addNote}){
 
     function handleSubmit(e){
         e.preventDefault();
-       if(newItem  === "") return
-       addNote(newItem)
-       setCount(count=> count + 1)
-       setNewItem("")
+       if(newItem  === "") return;
+       addNote(newItem);
+       setNewItem("");
       }
 
   return(

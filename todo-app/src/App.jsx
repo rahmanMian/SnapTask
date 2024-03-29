@@ -59,8 +59,8 @@ export default function App() {
 
     
     const [count, setCount] = useState(() => {
-        const storedNumber = localStorage.getItem('COUNT');
-        return storedNumber ? parseInt(storedNumber, 10) : 0;
+        const storedNumber =  0;
+        return storedNumber;
     });
 
     const [todos, setTodos] = useState(() => {
@@ -220,12 +220,18 @@ export default function App() {
         switch (status) {
             case "to-do":
             setToDoNotes(prevNotes => prevNotes.filter(note => note.id !== id));
+            
+        setCount(prevCount => prevCount - 1);
                 break;
             case "done":
                 setDoneNotes(prevNotes => prevNotes.filter(note => note.id !== id));
+                
+        setCount(prevCount => prevCount - 1);
                 break;
             case "backlog":
                 setBacklogNotes(prevNotes => prevNotes.filter(note => note.id !== id));
+                
+        setCount(prevCount => prevCount - 1);
                 break;
             default:
              // Default to "to-do" if count state is not divisible by 3
@@ -233,7 +239,6 @@ export default function App() {
         }
 
        
-        setCount(prevCount => prevCount - 1);
     }
 
 
