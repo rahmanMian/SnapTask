@@ -108,31 +108,31 @@ export default function App() {
             title: title,
             status: ""
         };
-
-        // Add status property based on the count state
-        switch (count % 3) {
-            case 0:
-               newNote.status = "to-do";
-               setToDoNotes(prevNotes =>  [...prevNotes, newNote]);
-                break;
-            case 2:
-                newNote.status = "done";
-                setDoneNotes(prevNotes =>  [...prevNotes, newNote]);
-                break;
-            case 1:
-                newNote.status="backlog";
-                setBacklogNotes(prevNotes =>  [...prevNotes, newNote]);
-                break;
-            default:
-                newNote.status = ""; // Default to "to-do" if count state is not divisible by 3
-                break;
- 
+    
+        let b = backlogNotes.length;
+        let d = doneNotes.length;
+        let t = toDoNotes.length;
+    
+        // Find the minimum count among the categories
+        const min = Math.min(b, d, t);
+    
+        // Assign status based on the minimum count
+        if (min === t) {
+            newNote.status = "to-do";
+            setToDoNotes(prevNotes => [...prevNotes, newNote]);
+        } else if (min === d) {
+            newNote.status = "done";
+            setDoneNotes(prevNotes => [...prevNotes, newNote]);
+        } else if (min === b) {
+            newNote.status = "backlog";
+            setBacklogNotes(prevNotes => [...prevNotes, newNote]);
+        } else {
+            newNote.status = ""; // Default to "to-do" if count state is not divisible by 3
         }
-    
-        setNotes(prevNotes =>  [...prevNotes, newNote]);
-    
-        setCount(prevCount => prevCount + 1);
     }
+    
+
+
 
     function addTodo(title, noteID) {
         const newTodo = {
