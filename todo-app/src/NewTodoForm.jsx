@@ -23,6 +23,8 @@ export function NewTodoForm({setCount, addNote}){
     <div className="form-row">
      <input  id = "addInput" placeholder="Add a note..." value={newItem} onChange={e=> setNewItem(e.target.value)}/>
     </div>
+
+    
     
     
 </form>

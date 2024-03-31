@@ -110,7 +110,7 @@ export default function KanbanBoard({ toDoNotes, doneNotes, backlogNotes,setNote
 
     return (
         <DragDropContext onDragEnd={handleDragEnd}>
-            <div style={{ display: "flex", alignItems: "center", flexDirection: "row" }}>
+            <div className="kanbanCon" style={{ display: "flex", alignItems: "center", flexDirection: "row" }}>
                 <Column
                     title="To Do"
                     id="to-do"

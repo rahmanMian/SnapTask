@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import {MdClear} from 'react-icons/md';
 
 export function TodoItem({completed, id, title, toggleTodo, deleteTodo, editTodo, noteId}){
   const [newItem, setNewItem] = useState(title || "  "); 
@@ -22,7 +23,7 @@ export function TodoItem({completed, id, title, toggleTodo, deleteTodo, editTodo
       textarea.style.height = "auto"; // Reset the height to auto to calculate the new height
       textarea.style.width = "auto";
       textarea.style.height = textarea.scrollHeight + "px"; // Set the height to the scroll height
-      textarea.style.width = newItem.length*13 + "px";
+      textarea.style.width = newItem.length*20 + "px";
     }
   }, [newItem]);
   
@@ -35,8 +36,8 @@ export function TodoItem({completed, id, title, toggleTodo, deleteTodo, editTodo
        <textarea  id={"textarea_" + id} type="text" value= {newItem} onChange={handleEdit}  />
      </span>
     
-     <button className="singleInput button" onClick={handleDelete}  
-      id="deleteButton">Delete</button>
+     <MdClear className='clear' size="1.8rem" onClick={handleDelete}/>
+
 </li>
     )
 }
