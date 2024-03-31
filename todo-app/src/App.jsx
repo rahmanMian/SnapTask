@@ -77,8 +77,9 @@ export default function App() {
 
     
     const [count, setCount] = useState(() => {
-        const storedNumber =  0;
-        return storedNumber;
+        const storedValue = localStorage.getItem('COUNT');
+        
+        return storedValue ;
     });
 
     const [todos, setTodos] = useState(() => {
