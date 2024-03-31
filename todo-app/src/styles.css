@@ -45,7 +45,7 @@ h1{
      }
 
     .lineGrid > hr:nth-child(3) {
-        margin-top: 32px;
+        margin-top: 30px;
      }
 
 @media (max-width: 768px) {
