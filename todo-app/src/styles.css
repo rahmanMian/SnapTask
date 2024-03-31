@@ -3,6 +3,7 @@
    
   }
 
+
 .headContainer{
     display: flex;
     height: 10vh;
@@ -53,6 +54,8 @@ h1{
  }
 }
 
+
+
 .form-row{
     display: flex;
     justify-content: center;
@@ -62,14 +65,14 @@ h1{
 
 #addInput{
     margin-top: 40px;
-    width: 30vw;
-    height: 25px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 35vw;
+    height: 40px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     /* Other styles */
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 15px;
+    font-size: 18px;
     
 }
 
@@ -102,10 +105,12 @@ h1{
     font-size: 0.9em;
   }
 
+  
   #deleteButton{
     font-size: 0.7rem;
     width: 65px;
     height: 25px;
+   
 
   }
 
@@ -114,18 +119,30 @@ h1{
     color: white;
     font-size: 0.8em;
   }
-
+  
+  .add-icon{
+    margin-left: 3.32vw;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    cursor: url("./assets/pen.svg"),auto;
+  }
 
 
   li{
     list-style: none;
     display: flex;
     margin-left: 40px;
+    width:auto;
   }
 
   .singleInput{
     margin-left: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    background-color: #fef68a;
+  }
+
+  textarea{
+    background-color: #fef68a;
   }
 
 
@@ -141,7 +158,6 @@ h1{
     align-items: center;
     justify-content: space-between;
     font-size: 1.5rem;
-    position: sticky;
   }
 
     .list{
@@ -150,14 +166,102 @@ h1{
 
     textarea{
       border: none;
-      min-width: 300px;
       font-size: 1rem;
       font-family: "Roboto Slab";
       overflow-y: hidden;
       resize: none;
+      max-width: 10vw;
+      
     }
 
     textarea:hover{
-      border: 2px solid black;
       resize: none;
     }
+
+
+    .note{
+      background-color: #fef68a;
+      margin: 7px;
+      border-radius:10px;
+      padding: 1rem;
+      min-height: 20vh;
+      width: 25vw;
+      min-width:300px;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+    }
+
+
+
+    .note-footer{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+   
+    }
+
+    .delete-icon:hover{
+         transform: scale(1.2);
+         cursor: url("./assets/pen.svg"),auto;
+    }
+
+    .noteContainer{
+      margin-top: 40px;
+      height: 70vh; /* Set a fixed height for the container */
+  overflow: hidden; /* Hide the overflow content */
+}
+
+.no{
+  break-inside: avoid;
+}
+
+    
+    
+    .titleInput{
+      font-size: 1.5rem; /* Adjust the font size as needed */
+      font-weight: bold; /* Make the text bold */
+      color: #333;
+      min-width: 20%;
+      max-width: 19vw;
+      margin-bottom: 0;
+      
+    }
+
+    #todoAdd{
+      margin: 0;
+      border: none;
+    }
+    
+
+
+      
+    .column{
+      margin: 0;
+      border: 0;
+    }
+
+    .container{
+      margin: 0;
+      border: 0;
+    }
+    
+  .kanbanCon{
+    margin-top: 30px;
+    width: 100%;
+    justify-content: center;
+  }
+
+
+ .clear{
+  transform: translateY(2px); 
+  margin-left: 30px;
+  opacity: 0.3;
+ }
+ 
+ .clear:hover{
+ opacity: 0.7;
+ cursor: url("./assets/pen.svg"),auto;
+ }
