@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { DragDropContext } from 'react-beautiful-dnd';
 import Column from "./Column";
 
-export default function KanbanBoard({ toDoNotes, doneNotes, backlogNotes, setToDoNotes, setDoneNotes, setBacklogNotes, editStatusNote, deleteNote, editNote, todos, addTodo, toggleTodo, deleteTodo, editTodo }) {
+export default function KanbanBoard({ toDoNotes, doneNotes, backlogNotes,setNotes, setToDoNotes, setDoneNotes, setBacklogNotes, editStatusNote, deleteNote, editNote, todos, addTodo, toggleTodo, deleteTodo, editTodo }) {
     const handleDragEnd = (result) => {
         const { destination, source, draggableId } = result;
-
+    
         // If dropped outside the list or in the same position, return
         if (!destination || (source.droppableId === destination.droppableId && source.index === destination.index)) {
             return;
         }
-
+    
         // Determine the source and destination columns based on droppableId
         let sourceColumn, destinationColumn;
         switch (source.droppableId) {
@@ -26,7 +26,7 @@ export default function KanbanBoard({ toDoNotes, doneNotes, backlogNotes, setToD
             default:
                 break;
         }
-
+    
         switch (destination.droppableId) {
             case "to-do":
                 destinationColumn = toDoNotes;
@@ -40,51 +40,73 @@ export default function KanbanBoard({ toDoNotes, doneNotes, backlogNotes, setToD
             default:
                 break;
         }
-
-        // Create a copy of the source column
-        const updatedSource = Array.from(sourceColumn);
-
+    
         // Remove the dragged note from the source column
-        const [draggedNote] = updatedSource.splice(source.index, 1);
-
+        const draggedNote = sourceColumn[source.index];
+    
         // If the source and destination columns are different
         if (source.droppableId !== destination.droppableId) {
-            // Create a copy of the destination column
-            const updatedDestination = Array.from(destinationColumn);
+            // Remove the dragged note from the source column
+            const updatedSourceColumn = [...sourceColumn.slice(0, source.index), ...sourceColumn.slice(source.index + 1)];
+    
             // Insert the dragged note at the new position in the destination column
-            updatedDestination.splice(destination.index, 0, draggedNote);
-
+            const updatedDestinationColumn = [...destinationColumn.slice(0, destination.index), draggedNote, ...destinationColumn.slice(destination.index)];
+    
             // Update the state of the destination column notes array
             switch (destination.droppableId) {
                 case "to-do":
-                    setToDoNotes(updatedDestination);
+                    setToDoNotes(updatedDestinationColumn);
+                    editStatusNote(draggableId,"to-do");
                     break;
                 case "done":
-                    setDoneNotes(updatedDestination);
+                    setDoneNotes(updatedDestinationColumn);
+                    editStatusNote(draggableId,"done");
                     break;
                 case "backlog":
-                    setBacklogNotes(updatedDestination);
+                    setBacklogNotes(updatedDestinationColumn);
+                    editStatusNote(draggableId,"backlog");
+                    break;
+                default:
+                    break;
+            }
+    
+            // Update the state of the source column notes array
+            switch (source.droppableId) {
+                case "to-do":
+                    setToDoNotes(updatedSourceColumn);
+                    break;
+                case "done":
+                    setDoneNotes(updatedSourceColumn);
+                    break;
+                case "backlog":
+                    setBacklogNotes(updatedSourceColumn);
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            // If the source and destination columns are the same, just update the position of the note
+            const updatedColumn = [...sourceColumn.slice(0, source.index), ...sourceColumn.slice(source.index + 1)];
+            updatedColumn.splice(destination.index, 0, draggedNote);
+    
+            // Update the state of the source column notes array
+            switch (source.droppableId) {
+                case "to-do":
+                    setToDoNotes(updatedColumn);
+                    break;
+                case "done":
+                    setDoneNotes(updatedColumn);
+                    break;
+                case "backlog":
+                    setBacklogNotes(updatedColumn);
                     break;
                 default:
                     break;
             }
         }
-
-        // Update the state of the source column notes array
-        switch (source.droppableId) {
-            case "to-do":
-                setToDoNotes(updatedSource);
-                break;
-            case "done":
-                setDoneNotes(updatedSource);
-                break;
-            case "backlog":
-                setBacklogNotes(updatedSource);
-                break;
-            default:
-                break;
-        }
     };
+    
+  
 
     return (
         <DragDropContext onDragEnd={handleDragEnd}>

@@ -14,10 +14,12 @@ export default function App() {
             if (localValue === null) return [];
             return JSON.parse(localValue);
         } catch (error) {
-            console.error('Error parsing todo notes from localStorage:', error);
+            console.error('Error parsing notes from localStorage:', error);
             return [];
         }
     });
+
+   
 
     const [doneNotes, setDoneNotes] = useState(() => {
         try {
@@ -25,10 +27,11 @@ export default function App() {
             if (localValue === null) return [];
             return JSON.parse(localValue);
         } catch (error) {
-            console.error('Error parsing done notes from localStorage:', error);
+            console.error('Error parsing notes from localStorage:', error);
             return [];
         }
     });
+
 
     const [backlogNotes, setBacklogNotes] = useState(() => {
         try {
@@ -36,25 +39,40 @@ export default function App() {
             if (localValue === null) return [];
             return JSON.parse(localValue);
         } catch (error) {
-            console.error('Error parsing Backlog notes from localStorage:', error);
+            console.error('Error parsing notes from localStorage:', error);
             return [];
         }
     });
 
 
+    const [notes, setNotes] = useState(() => {
+        try {
+            const localValue = localStorage.getItem('NOTES');
+            if (localValue === null) return [];
+            return JSON.parse(localValue);
+        } catch (error) {
+            console.error('Error parsing notes from localStorage:', error);
+            return [];
+        }
+    });
+
+    
+        useEffect(() => {
+            localStorage.setItem("BACKLOG", JSON.stringify(backlogNotes));
+        }, [backlogNotes]); // Listen for changes in the 'notes' array
+        
+  
 
     useEffect(() => {
         localStorage.setItem("TODO", JSON.stringify(toDoNotes));
     }, [toDoNotes]);
 
-    useEffect(() => {
-        localStorage.setItem("DONE",  JSON.stringify(doneNotes));
-    }, [doneNotes]);
 
     useEffect(() => {
-        localStorage.setItem("BACKLOG", JSON.stringify(backlogNotes));
-    }, [backlogNotes]);
-
+        localStorage.setItem("DONE", JSON.stringify(doneNotes));
+        }, [doneNotes]);
+    
+  
 
 
     
@@ -69,16 +87,7 @@ export default function App() {
         return JSON.parse(localValue);
     });
 
-    const [notes, setNotes] = useState(() => {
-        try {
-            const localValue = localStorage.getItem('NOTES');
-            if (localValue === null) return [];
-            return JSON.parse(localValue);
-        } catch (error) {
-            console.error('Error parsing notes from localStorage:', error);
-            return [];
-        }
-    });
+ 
 
     useEffect(() => {
         localStorage.setItem("ITEMS", JSON.stringify(todos));
@@ -98,27 +107,29 @@ export default function App() {
             title: title,
             status: ""
         };
-    
+
         // Add status property based on the count state
         switch (count % 3) {
             case 0:
-                newNote.status = "to-do";
-                setToDoNotes(prevNotes => [...prevNotes, newNote]);
+               newNote.status = "to-do";
+               setToDoNotes(prevNotes =>  [...prevNotes, newNote]);
                 break;
             case 2:
                 newNote.status = "done";
-                setDoneNotes(prevNotes => [...prevNotes, newNote]);
+                setDoneNotes(prevNotes =>  [...prevNotes, newNote]);
                 break;
             case 1:
-                newNote.status = "backlog";
-                setBacklogNotes(prevNotes => [...prevNotes, newNote]);
+                newNote.status="backlog";
+                setBacklogNotes(prevNotes =>  [...prevNotes, newNote]);
                 break;
             default:
                 newNote.status = ""; // Default to "to-do" if count state is not divisible by 3
                 break;
+ 
         }
     
-        
+        setNotes(prevNotes =>  [...prevNotes, newNote]);
+    
         setCount(prevCount => prevCount + 1);
     }
 
@@ -198,7 +209,6 @@ export default function App() {
                 );
                 break;
             default:
-                newNote.status = ""; // Default to "to-do" if count state is not divisible by 3
                 break;
         }
         
@@ -207,9 +217,7 @@ export default function App() {
     function toggleTodo(id, completed) {
         setTodos(prevTodos =>
             prevTodos.map(todo =>
-                todo.id === id ? { ...todo, completed: completed } : todo
-            )
-        );
+                todo.id === id ? { ...todo, completed: completed } : todo));
     }
 
     function deleteTodo(id) {
@@ -220,32 +228,19 @@ export default function App() {
         switch (status) {
             case "to-do":
             setToDoNotes(prevNotes => prevNotes.filter(note => note.id !== id));
-            
-        setCount(prevCount => prevCount - 1);
                 break;
             case "done":
                 setDoneNotes(prevNotes => prevNotes.filter(note => note.id !== id));
-                
-        setCount(prevCount => prevCount - 1);
                 break;
             case "backlog":
                 setBacklogNotes(prevNotes => prevNotes.filter(note => note.id !== id));
-                
-        setCount(prevCount => prevCount - 1);
-                break;
-            default:
-             // Default to "to-do" if count state is not divisible by 3
                 break;
         }
 
-       
+        setNotes(prevNotes => prevNotes.filter(note => note.id !== id));
+        setCount(prevCount => prevCount - 1);
     }
 
-
-
-   
-    
-  
 
     return (
         <>
@@ -264,10 +259,11 @@ export default function App() {
                 <NewTodoForm setCount={setCount} addNote={addNote} />
             </div>
         
-                         <KanbanBoard toDoNotes= {toDoNotes} doneNotes={doneNotes} backlogNotes = {backlogNotes} 
+                         <KanbanBoard notes = {notes} toDoNotes= {toDoNotes} doneNotes={doneNotes} backlogNotes = {backlogNotes} 
                                                   setToDoNotes={setToDoNotes}
                                                   setDoneNotes={setDoneNotes}
                                                   setBacklogNotes={setBacklogNotes}
+                                                  setNotes={setNotes}
                                                   editStatusNote={editNoteStatus}  
                                                   deleteNote={deleteNote}
                                                     editNote={editNote}
@@ -277,5 +273,5 @@ export default function App() {
                                                     deleteTodo={deleteTodo}
                                                     editTodo={editTodo}/>               
         </>
-    );
-}
+    )
+    };
