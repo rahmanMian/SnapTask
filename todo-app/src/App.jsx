@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid'; // Import uuidv4 for generating unique IDs
 import { NewTodoForm } from "./NewTodoForm";
-import todoLogo from "./assets/todologo.png";
 import { Note } from "./Note";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import KanbanBoard from "./Kanban";
-
+import logo from "./assets/todonotes.svg";
 export default function App() {
 
     const [toDoNotes, setToDoNotes] = useState(() => {
@@ -247,14 +246,8 @@ export default function App() {
         <>
         
             <div className="headContainer">
-                <div className="lineGrid">
-                    <hr />
-                    <hr />
-                    <hr />
-                    <hr />
-                </div>
-                <img title="logo" src={todoLogo} />
-                <h1 className="header">Todo List</h1>
+                <img title="Logo" src={logo}></img>
+                <h1 className="header">SnapTask</h1>
             </div>
             <div className="formContainer">
                 <NewTodoForm setCount={setCount} addNote={addNote} />

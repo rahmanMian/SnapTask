@@ -5,11 +5,12 @@ import { Note } from "./Note";
 
 
 const Container = styled.div`
-    background-color: white;
+    background-color: rgba(32,32,36,1);;;
     width: 100vw/3;
     height:100vh;
     margin: 0;
     border: none;
+
 `;
 
 

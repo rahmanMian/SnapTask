@@ -50,7 +50,7 @@ export function NoteTitle({ title,status, id, deleteNote, editNote, todos, addTo
         <Draggable draggableId={id} key={id} index={index}>
         {(provided, snapshot) =>(
          <div className="container" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} isDragging={snapshot.isDragging}>  
-        <div className="note">
+        <div className="note" >
             <span id="textPan">
                 <textarea className="titleInput" id={"textarea_" + id} type="text" value={newItem} onChange={handleEdit} />
             </span>
