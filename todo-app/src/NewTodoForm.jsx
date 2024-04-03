@@ -6,7 +6,7 @@ export function NewTodoForm({setCount, addNote}){
     
 
     //usestate for entering new values
-    const [newItem, setNewItem] = useState("")
+    const [newItem, setNewItem] = useState("");
 
     function handleSubmit(e){
         e.preventDefault();
@@ -23,10 +23,7 @@ export function NewTodoForm({setCount, addNote}){
     <div className="form-row">
      <input  id = "addInput" placeholder="Add a note..." value={newItem} onChange={e=> setNewItem(e.target.value)}/>
     </div>
-
-    
-    
-    
+ 
 </form>
 </>
   )

@@ -1,52 +1,51 @@
 *{
     margin: 0;
-   
   }
 
+  body{
+    background-color: rgba(32,32,36,1);
+  }
+  .container{
+    background-color: rgba(32,32,36,1);
+  }
+
+  .column{
+    background-color: rgba(32,32,36,1);
+  }
+
+  .kanbanCon{
+    background-color: rgba(32,32,36,1);
+  }
+  #todo{
+    background-color: rgba(32,32,36,1);
+  }
+  
 
 .headContainer{
     display: flex;
     height: 11vh;
     align-items: center;
-    background-color: #ffdb58;
+    background-color: rgba(32,32,36,1);
+    border-bottom: 0.2px solid grey;
 }
 
 img{
-    height: 5rem;
+    height: 6.5rem;
     z-index: 1;
 }
+
 
 h1{
     font-family: 'Roboto Slab', serif;
     font-size: 3rem;
     z-index: 1;
+    color: grey;
 }
 
 
-.lineGrid{
-    height: 10vh;
-    position: absolute;  
-}
 
-.lineGrid > hr{
-        border: 1px solid black;
-        border-style: dashed;
-        width: 100vw;
-        margin-bottom: 2.6vh;
-        z-index: 2;
-      }
 
-      .lineGrid > hr:first-child {
-       margin-top: 3px;
-    }
 
-    .lineGrid >.lineGrid > hr:nth-child(2) {
-        margin-bottom: 3px;
-     }
-
-    .lineGrid > hr:nth-child(3) {
-        margin-top: 30px;
-     }
 
 @media (max-width: 768px) {
     .headContainer {
@@ -54,6 +53,9 @@ h1{
  }
 }
 
+.formContainer{
+  background-color: rgba(32,32,36,1);
+}
 
 
 .form-row{
@@ -63,17 +65,20 @@ h1{
 
 
 
+
+
 #addInput{
     margin-top: 40px;
     width: 35vw;
-    height: 40px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    height: 30px;
+    box-shadow: 1px 1px 2.5px rgba(0, 0, 0, 1);
     /* Other styles */
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid grey;
     border-radius: 5px;
     font-size: 18px;
-    
+    color: white;
+    background-color:  rgba(32,32,36,1);
 }
 
 
@@ -121,10 +126,10 @@ h1{
   }
   
   .add-icon{
-    margin-left: 3.32vw;
+    margin-left: 2.5vw;
     margin-bottom: 30px;
     margin-top: 20px;
-    cursor: url("./assets/pen.svg"),auto;
+    cursor: pointer;
   }
 
 
@@ -141,17 +146,10 @@ h1{
     background-color: #fef68a;
   }
 
-  textarea{
-    background-color: #fef68a;
-  }
 
 
-  input[type="checkbox"]{
-      width: 30px; 
-      height: 30px;
-      position: relative;
-      
-  }
+
+
 
   label[for="singleInput"] {
     display: flex;
@@ -168,6 +166,7 @@ h1{
       border: none;
       font-size: 1rem;
       font-family: "Roboto Slab";
+      color: white;
       overflow-y: hidden;
       resize: none;
       max-width: 10vw;
@@ -178,20 +177,35 @@ h1{
       resize: none;
     }
 
+  
+
 
     .note{
-      background-color: #fef68a;
+      opacity: 1;
+      color: white;
       margin: 7px;
-      border-radius:10px;
+      border:0.1px solid grey;
+      border-radius: 10px;
       padding: 1rem;
-      min-height: 20vh;
-      width: 25vw;
+      min-height: 15vh;
+      width: 20vw;
       min-width:300px;
       box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
 
+
+    }
+
+    #textPan{
+      opacity: 1;
+      background-color: rgba(32,32,36,1) ;
+      transform: translateY(-3px);
+    }
+
+    textarea{
+      background-color:  rgba(32,32,36,1);
     }
 
 
@@ -205,7 +219,7 @@ h1{
 
     .delete-icon:hover{
          transform: scale(1.2);
-         cursor: url("./assets/pen.svg"),auto;
+         cursor: pointer;
     }
 
     .noteContainer{
@@ -221,9 +235,8 @@ h1{
     
     
     .titleInput{
-      font-size: 1.5rem; /* Adjust the font size as needed */
-      font-weight: bold; /* Make the text bold */
-      color: #333;
+      font-size: 1.5rem; /* Adjust the font size as needed */;
+      color: white;
       min-width: 20%;
       max-width: 19vw;
       margin-bottom: 0;
@@ -241,6 +254,7 @@ h1{
     .column{
       margin: 0;
       border: 0;
+    
     }
 
     .container{
@@ -252,16 +266,57 @@ h1{
     margin-top: 30px;
     width: 100%;
     justify-content: center;
+    background-color: rgba(32,32,36,1);
   }
 
 
  .clear{
-  transform: translateY(2px); 
+  transform: translateY(-4px); 
   margin-left: 30px;
   opacity: 0.3;
  }
+
+
  
  .clear:hover{
  opacity: 0.7;
- cursor: url("./assets/pen.svg"),auto;
+ cursor: pointer;
  }
+
+
+
+
+*::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+
+
+/* Hide default checkbox */
+input[type="checkbox"] {
+  display: none;
+}
+
+/* Style the label to create a custom checkbox appearance */
+.checkbox-label {
+  display: inline-block;
+  width: 18.5px;
+  height: 18.5px;
+  position: relative;
+  color: rgba(32, 32, 36, 1);
+  border: 1px solid white; /* Add border for better visibility */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  text-align: center; /* Center align the tick mark */
+  
+}
+
+/* Style the tick mark */
+.checkbox-label span {
+  font-size: 15px; /* Adjust size of the tick mark */
+  transform: translateY(-5px);
+}
+
+/* Change background color when checkbox is checked */
+input[type="checkbox"]:checked + .checkbox-label {
+  background-color: rgba(32, 32, 36, 1);
+  color: white; /* Change color of the checkbox background when checked */
+}
