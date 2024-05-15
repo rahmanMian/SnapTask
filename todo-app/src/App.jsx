@@ -10,8 +10,9 @@ export default function App() {
 
 
     /**
-     * 
+     * DOCKERIZE PLEAES
      *
+     * 
      */
 
     const [toDoNotes, setToDoNotes] = useState(() => {
