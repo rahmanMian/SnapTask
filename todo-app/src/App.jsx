@@ -7,6 +7,13 @@ import KanbanBoard from "./Kanban";
 import logo from "./assets/todonotes.svg";
 export default function App() {
 
+
+
+    /**
+     * 
+     *
+     */
+
     const [toDoNotes, setToDoNotes] = useState(() => {
         try {
             const localValue = localStorage.getItem('TODO');
